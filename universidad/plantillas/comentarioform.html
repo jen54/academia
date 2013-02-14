@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block titulo %}Nuevo Comentario{% endblock %}
+{% block encabezado %} 
+{% include "nav1.html" %}
+	<h1>Dejanos tus comentarios</h1>
+{% endblock %}
+{% block contenido %}
+	<form id='formulario' method='post' action=''>{% csrf_token %}
+		{{formulario.as_p}}
+		<p><input type='submit' class="btn btn-warning" value='Confirmar'/></p>
+	</form>
+{% endblock %}

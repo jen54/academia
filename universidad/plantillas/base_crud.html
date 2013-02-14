@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{% endblock titulo %}
+
+{% block js %}
+	<script type="text/javascript">
+		$('#formulario').bind('submit', function(e){
+			e.preventDefault();
+			var accion = $('#formulario').find('input[type=submit]').val();
+			var url = accion == 'Grabar' ? '/add_user_ajax/' : '/editar_ajax/';
+			<li><a href='/gestion'><i class="icon-chevron-right"></i> Gestionar Universidades</a></li>
+
+
+			var fd = new FormData($('#formulario').get(0));
+			if (accion == 'Terminar'){
+				var id_universidad = location.href.substr(location.href.lastIndexOf('/')+1);
+				fd.append('id_universidad', id_universidad);
+			}
+			
+			$.ajax({
+				url: url,
+				data: fd,
+				type: 'POST',
+				success: function(data){
+					if (data.exito){
+						$("#resultados").html('<span class="alert alert-success">Creado exitosamente!</span>');
+						if (accion == 'Grabar'){
+							$('#formulario').get(0).reset();
+						}
+					} else {
+						$('#resultados').html('');
+						if (data.errores.nombre){
+							$('<span class="alert alert-error"><b>Nombre</b> '+data.errores.nombre+'</span>').appendTo('#resultados');
+						}
+						if (data.errores.direccion){
+							$('<span class="alert alert-error"><b>Direccion</b> '+data.errores.direccion+'</span>').appendTo('#resultados');
+						}
+						if (data.errores.web){
+							$('<span class="alert alert-error"><b>Web</b> '+data.errores.web+'</span>').appendTo('#resultados');
+						}
+						if (data.errores.idioma){
+							$('<span class="alert alert-error"><b>Idioma</b> '+data.errores.idioma+'</span>').appendTo('#resultados');
+						}
+					}
+				}, 
+				processData: false,
+				contentType: false
+			});
+		});
+	</script>
+{% endblock js %}
+
+{% block contenido %}
+<form method="post" id="formulario" enctype="multipart/form-data">{% csrf_token %}
+	{{ formulario.as_p }}
+	<input type="submit" value="{% block valor %}{% endblock valor %}" class="btn btn-primary">
+</form>
+<div id="resultados"></div>
+
+{%block atras%}	<li><a href='/gestion'><i class="icon-chevron-right"></i> Gestionar Universidades</a></li>
+{%endblock atras%}
+
+{% endblock contenido %}

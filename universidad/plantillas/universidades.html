@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block titulo %} Recetas registradas {% endblock %}
+
+{% block css %}
+  <style>
+	img { width:100px; }
+  </style>
+{% endblock %}
+
+
+{% block encabezado %}
+{% include "nav.html" %}
+  <h1>Nuestras recetas</h1>
+{% endblock %}
+
+{% block contenido %}
+<a href="/universidad/nueva">Agregar una Universidad</a>
+<ul>
+	{% for dato in datos %}
+	<li>
+		<a href='{% url principal.views.detalle_universidad dato.id %}'>{{dato.nombre}}</a>
+		{{dato.direccion}}</a>
+		{{dato.web}}</a>
+		{{dato.idioma}}</a>
+		{{dato.ciudad}}</a>
+		{{dato.pais}}</a>
+		{{dato.continente}}</a>
+		<img src='{{MEDIA_URL}}{{dato.imagen}}'>
+	</li>
+	{% empty %}
+	<li>Aún no hay recetas registradas</li>
+	{% endfor %}
+</ul>
+{% endblock %}

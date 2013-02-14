@@ -1,0 +1,16 @@
+#encoding:utf-8 
+from django.forms import ModelForm
+from django import forms
+from principal.models import Universidad, Comentario, Continente, Pais, Ciudad
+
+class ContactoForm(forms.Form):
+	correo = forms.EmailField(label='Tu correo electrónico')
+	mensaje = forms.CharField(widget=forms.Textarea)
+
+class UniversidadForm(ModelForm):
+    class Meta:
+        model = Universidad
+
+class ComentarioForm(ModelForm):
+    class Meta:
+        model = Comentario

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Django[Python]{% endblock %}
+{% block contenido %}
+<div id="resultado" >
+{% block encabezado %}<h1>Eliminar registro</h1>{% endblock%}
+<script type="text/javascript" src='{{STATIC_URL}}js/scripts.js'></script>	
+<form class='estiloform' name='formulario'  action="" >
+{% if results %}
+	<table  id="tabla_">
+	<tr><td>Nombre</td>
+		<td>Direccion</td>
+		<td>Web</td>
+		<td>Idioma</td>
+		<td>Accion</td></tr>
+	{% for universidad in results %}	
+		<tr><td>{{universidad.nombre|upper}}</td><td>{{universidad.direccion}}</td>
+		<td>{{universidad.web}}</td><td>{{universidad.idioma}} </td>
+		<td><a href=# onclick="eliminar('?codigo={{universidad.id}}','resultado','{{universidad.id}}'); return false">Eliminar</A></td>
+		</tr>	
+	{% endfor %}
+	
+	</table>	
+{% else %}
+	<p>Datos no encontrados</p>
+{% endif %}
+</form>
+{% if exito %}
+	<div class="mensaje" align="justify">Registro #{{cod}} eliminado</div>
+{% endif %}
+{% endblock %}
+</div> 

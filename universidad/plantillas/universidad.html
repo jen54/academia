@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block titulo %} {{universidad.titulo}} {% endblock %}
+
+{% block encabezado %} 
+{% include "nav1.html" %}
+  <h1>{{universidad.nombre|title}}</h1>
+{% endblock %}
+
+{% block contenido %}
+	<div id='nombre'>
+		<h2>Nombre</h2>
+		<p>{{universidad.nombre}}</p>
+	</div>
+	<div id='direccion'>
+		<h2>Direccion</h2>
+		<p>{{universidad.direccion}}</p>
+	</div>
+	<div id='web'>
+		<h2>Web</h2>
+		<p>{{universidad.web}}</p>
+	</div>
+	<div id='idioma'>
+		<h2>Idioma </h2>
+		<p>{{universidad.idioma}}</p>
+	</div>
+	<div id='pais'>
+		<h2>Pais</h2>
+		<p>{{universidad.pais}}</p>
+	</div>
+	<div id='ciudad'>
+		<h2>Ciudad</h2>
+		<p>{{universidad.ciudad}}</p>
+	</div>
+	<div id='continente'>
+		<h2>Continente</h2>
+		<p>{{universidad.continente}}</p>
+	</div>
+	<!-- <div id='referencia'>
+		<img src='{{MEDIA_URL}}{{receta.imagen}}'>
+	</div> -->
+	<div id='comentarios'>
+		<h2>Comentarios</h2>
+			{% for item in comentarios %}
+				<p>{{item.texto}}</p>
+			{% empty %}
+				<p>Sin comentarios registrados</p>
+			{% endfor %}
+	</div>
+	<footer>
+	  <p>Registrado {{universidad.tiempo_registro|date:'SHORT_DATETIME_FORMAT' }} por {{universidad.usuario}}</p>
+	</footer>
+{% endblock %}

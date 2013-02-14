@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% comment %} Aqui van comentarios {% endcomment %}
+
+{% block titulo %} Inicio {% endblock %}
+
+{% block encabezado %} 
+     {% include "nav.html" %}
+	<h1>Universidades </h1>
+{% endblock %}
+
+{% block contenido %}
+<!-- ------------------------------- -->
+<div id="resultado" >
+<h2>Busqueda filtrada</h2>
+<form class='estiloform' name='formulario' action="">
+	<div><label for="p">Buscar: </label></div>
+	<div><input type="text" name="q"  value="{{ consulta|escape }}"></div>
+	<div><input type='submit' value='enviar' onclick="ConsultaFiltrado(); return false"></div>
+	{% if consulta %}	  
+	   <h1>Resultados para "{{ consulta|escape }}":</h1>
+	{% if results %}	
+
+		<table class="table table-hover">			
+			<tr>
+				<td>Nombre</td>
+				<td>Direccion</td>
+				<td>Web</td>
+				<td>Idioma</td>
+			</tr>		
+			{% for universidad in results %}							
+				<tr><td>{{universidad.nombre|upper}}</td><td >{{universidad.direccion}}</td>
+				<td>{{universidad.web}}</td><td >{{universidad.idioma}} </td><td >{{universidad.pais}} </td>
+				</tr>					
+			{% endfor %}
+			</table>		
+	{% else %}
+		<div class="mensaje" align="justify">No hay resultados</div>
+	{% endif %}	
+{% endif %}
+</form>
+<div id=Vacios align="center" ></div>
+
+<!-- ---------------------------------- -->
+  <p>
+	  Actualmente tenemos registradas: 
+     {% with total=universidades.count %} 
+		{{total}} universidad{{total|pluralize}}
+	 {% endwith %}
+  </p>
+	<ul>		
+	  {% for dato in universidades %}
+	  <li class="{% cycle 'impar' 'par' %}">{{dato.nombre|title}}</li>
+	  {% empty %}
+	  <li>No hay universidades registradas aún.</li>
+	  {% endfor %}
+	</ul>
+{% endblock %}

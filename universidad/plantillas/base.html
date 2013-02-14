@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block titulo %}{% endblock titulo %}</title>
+
+  <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.css">
+  <link href="{{STATIC_URL}}css/docs.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap-responsive.css">
+    <script src="{{STATIC_URL}}js/jquery.js"></script>
+    <script src="{{STATIC_URL}}js/modernizr.js"></script>
+</head>
+<body>
+   {% include "nav.html" %}
+
+
+<!-- Subhead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+    <h1>Universidades en el Mundo</h1>
+    <p class="lead">Listado de Universidades a Nivel Mundial</p>
+  </div>
+</header>
+
+  <div class="container">
+
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row">
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+          <li><a href='/buscar'><i class="icon-chevron-right"></i> Buscar General</a></li>
+          <li><a href='/combo_ciudad'><i class="icon-chevron-right"></i> Busqueda por Ciudad</a></li>
+          <li><a href='/combo'><i class="icon-chevron-right"></i> Busqueda por Pais</a></li>
+          <li><a href='/combo_continente'><i class="icon-chevron-right"></i> Busqueda por Continente</a></li>
+          <li><a href='/comenta'><i class="icon-chevron-right"></i> Deja tu Comentario</a></li>
+          <li><a href='/universidades'><i class="icon-chevron-right"></i> Ver Mas</a></li>
+          <li><a href='/json'><i class="icon-chevron-right"></i> Extraer Datos</a></li>
+<!--           <li><a href='/gestion'><i class="icon-chevron-right"></i> Gestionar Universidades</a></li>
+ -->   <!--        <li><a href="#html-template"><i class="icon-chevron-right"></i> HTML template</a></li>
+          <li><a href="#examples"><i class="icon-chevron-right"></i> Examples</a></li>
+          <li><a href="#what-next"><i class="icon-chevron-right"></i> What next?</a></li> -->
+        </ul>
+      </div>
+      <div class="span9">
+
+
+
+        <!-- Download
+        ================================================== -->
+
+
+    <!-- <div class="hero-unit">
+      <h3>Bienvenidos </h3>
+      
+    </div> -->
+    <div class="row-fluid">
+<!--         <li><a href='/gestion'><i class="icon-chevron-right"></i> Gestionar Universidades</a></li>
+ -->
+      {% block contenido %}
+
+      {% endblock contenido %}
+    </div>
+
+  
+  
+<!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{STATIC_URL}}bootstrap-transition.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-alert.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-modal.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-dropdown.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-scrollspy.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-tab.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-tooltip.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-popover.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-button.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-collapse.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-carousel.js"></script>
+    <script src="{{STATIC_URL}}bootstrap-typeahead.js"></script>
+    <script>
+      !function ($) {
+        $(function(){
+          // carousel demo
+          //$('#myCarousel').carousel()
+        })
+      }(window.jQuery)
+    </script>
+    <script src="carousel%20Archivos/holder.js"></script>
+
+
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="{{STATIC_URL}}js/bootstrap.js"></script>
+	<script type="text/javascript" src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
+	<script type="text/javascript">
+		$.ajaxSetup({
+			beforeSend: function(xhr){
+				xhr.setRequestHeader('X-CSRFToken', $.cookie('csrftoken'));
+			}
+		});
+	</script>
+	{% block js %}{% endblock js %}
+</body>
+
+</html>
